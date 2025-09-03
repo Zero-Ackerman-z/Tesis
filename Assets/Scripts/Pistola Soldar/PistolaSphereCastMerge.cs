@@ -23,7 +23,6 @@ public class PistolaSphereCastMerge : MonoBehaviour
     public ObjectPoolManager _ObjectPoolManager;
 
 
-
     private NewPart currentPart;
     public Text voltageText;
     public Text speedText;
