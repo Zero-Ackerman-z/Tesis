@@ -1,9 +1,10 @@
 {
-    "name": "Scripts",
+    "name": "EditMode",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner"
+        "Unity.XR.Interaction.Toolkit",
+        "Unity.XR.Management.TestPackage.Editor"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
