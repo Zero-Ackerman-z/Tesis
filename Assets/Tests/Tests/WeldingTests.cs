@@ -73,7 +73,7 @@ public class WeldingTests
         // Simular el evento de activación del gatillo
         effects.StartWelding(new ActivateEventArgs());
 
-        yield return null; 
+        yield return null;
 
         Assert.IsNotNull(effects.currentFire, "El efecto de fuego no se instanció."); // Assert 5: El efecto de fuego debe existir.
         Assert.IsTrue(effects.currentFire.isPlaying, "El efecto de fuego no está reproduciéndose."); // Assert 6: El efecto debe estar activo.
@@ -94,7 +94,7 @@ public class WeldingTests
         // Simular la desactivación
         effects.StopWelding(new DeactivateEventArgs());
 
-        yield return new WaitForSeconds(effects.currentFire.main.duration + 0.1f); 
+        yield return new WaitForSeconds(effects.currentFire.main.duration + 0.1f);
 
         Assert.IsTrue(effects.currentFire == null); // Assert 8: El efecto de fuego debe ser nulo.
 

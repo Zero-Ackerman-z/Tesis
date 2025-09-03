@@ -1,10 +1,13 @@
 {
-    "name": "EditMode",
+    "name": "Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "Asembly",
+        "Interaction",
         "Unity.XR.Interaction.Toolkit",
-        "Unity.XR.Management.TestPackage.Editor"
+        "wel"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

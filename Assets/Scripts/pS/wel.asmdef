@@ -1,10 +1,11 @@
 {
-    "name": "UI",
+    "name": "wel",
     "rootNamespace": "",
     "references": [
+        "GUID:6d76031d7ac66e1419760a4534cf54ef",
+        "GUID:fe685ec1767f73d42b749ea8045bfe43",
         "GUID:64df4abba2e36f74ea2550f8d542af9d",
-        "GUID:e989f6c8b8bbff44fa7beb7c8c2d8387",
-        "GUID:fe685ec1767f73d42b749ea8045bfe43"
+        "GUID:e989f6c8b8bbff44fa7beb7c8c2d8387"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

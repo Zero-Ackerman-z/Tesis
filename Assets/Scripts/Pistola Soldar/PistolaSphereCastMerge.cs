@@ -12,7 +12,7 @@ public class PistolaSphereCastMerge : MonoBehaviour
     public LayerMask layerMask; // Define qué capas detectar
     private List<GameObject> detectedObjects = new List<GameObject>();
     public Transform pivot;
-    bool Press;
+    public bool Press;
     public ParticleSystem Spark;
  
     [SerializeField] private InputActionReference triggerAction; // Referencia al botón del gatillo
