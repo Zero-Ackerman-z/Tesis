@@ -7,9 +7,9 @@ public class ObjectPoolManager : MonoBehaviour
     public GameObject prefab; // Prefab del objeto a instanciar
     public int poolSize = 10; // Cantidad de objetos a crear
     public int activeCount = 0; // Cantidad de objetos activos
-    private List<GameObject> pool = new List<GameObject>(); // Lista de objetos creados
+    public List<GameObject> pool = new List<GameObject>(); // Lista de objetos creados
 
-    void Start()
+    public void Start()
     {
         // Crear la cantidad inicial de objetos en (0,0,0) y desactivarlos
         for (int i = 0; i < poolSize; i++)
