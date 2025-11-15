@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: 544d2e9fa79971b4b983df983605d715
-PrefabImporter:
+guid: b45cc4a1de7c3f24fba0900602323e27
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -10,5 +11,5 @@ AssetOrigin:
   productId: 276400
   packageName: UnityFactory
   packageVersion: 1.0
-  assetPath: Assets/UnityFactorySceneHDRP/Scene_Factory/Background/Prefabs/Building_Collider.prefab
+  assetPath: Assets/UnityFactorySceneHDRP/Scene_Factory/Background/Materials/Wagon.mat
   uploadId: 645177
