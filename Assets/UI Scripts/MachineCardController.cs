@@ -2,13 +2,12 @@ using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class MachineCardController : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] private Image thumbnail;
-    [SerializeField] private Text machineNameText;
+    [SerializeField] private TextMeshProUGUI machineNameText;
     [SerializeField] private Transform modelContainer; // where model is instantiated (local)
     [SerializeField] private GameObject expandedIndicator; // show when expanded
 
@@ -35,7 +34,6 @@ public class MachineCardController : MonoBehaviour
     {
         data = machineData;
         machineNameText.text = data.machineName;
-        thumbnail.sprite = data.thumbnail;
         // instantiate model (inactive initially to save performance)
         if (modelInstance != null) Destroy(modelInstance);
         if (data.modelPrefab != null && modelContainer != null)
