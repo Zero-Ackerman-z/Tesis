@@ -11,36 +11,55 @@ public class UIMainMenuController : MonoBehaviour
     [SerializeField] private Button exitButton;
 
     [Header("Panels")]
-    [SerializeField] private CanvasGroup machineSelectorCanvasGroup;
+    [SerializeField] private GameObject machineSelectorPanel;
+    [SerializeField] private RectTransform machineSelectorContainer;
+
+    [Header("References")]
+    [SerializeField] private Button startButton;
+    [SerializeField] private GameObject panelOptions;
+    [SerializeField] private RectTransform optionsContainer;
+
+    [Header("Helper")]
     [SerializeField] private UIAnimationHelper animator;
 
     private void Awake()
     {
+        machineSelectorPanel.SetActive(false);
+        panelOptions.SetActive(false);
+
+        startButton.onClick.AddListener(OnStartClicked);
+
         practiceButton.onClick.AddListener(() => OnModeSelected(PlayMode.Practice));
         evaluationButton.onClick.AddListener(() => OnModeSelected(PlayMode.Evaluation));
         creditsButton.onClick.AddListener(OnCredits);
         exitButton.onClick.AddListener(OnExit);
+    }
 
-        machineSelectorCanvasGroup.alpha = 0f;
-        machineSelectorCanvasGroup.interactable = false;
-        machineSelectorCanvasGroup.blocksRaycasts = false;
+    private void OnStartClicked()
+    {
+        animator.ScaleDown(startButton.transform, 0.8f, 0.25f);
+
+        startButton.gameObject.SetActive(false);
+
+        panelOptions.SetActive(true);
+        optionsContainer.localScale = Vector3.zero;
+
+        animator.ScaleUp(optionsContainer, 1f, 0.4f);
     }
 
     private void OnModeSelected(PlayMode mode)
     {
         MachineSelectionManager.Instance.SetMode(mode);
-        // show selector
-        animator.FadeCanvasGroup(machineSelectorCanvasGroup, 1f).OnComplete(() =>
-        {
-            machineSelectorCanvasGroup.interactable = true;
-            machineSelectorCanvasGroup.blocksRaycasts = true;
-        });
+
+        machineSelectorPanel.SetActive(true);
+        machineSelectorContainer.localScale = Vector3.zero;
+
+        animator.ScaleUp(machineSelectorContainer, 1f, 0.35f);
     }
 
     private void OnCredits()
     {
-        // Implement credits popup or scene
-        Debug.Log("Credits pressed");
+        Debug.Log("Open Credits...");
     }
 
     private void OnExit()
@@ -50,6 +69,8 @@ public class UIMainMenuController : MonoBehaviour
 
     private void OnDestroy()
     {
+        startButton.onClick.RemoveListener(OnStartClicked);
+
         practiceButton.onClick.RemoveAllListeners();
         evaluationButton.onClick.RemoveAllListeners();
         creditsButton.onClick.RemoveAllListeners();
