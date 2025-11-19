@@ -1,0 +1,75 @@
+using DG.Tweening;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+
+public class MachineCardController : MonoBehaviour
+{
+    [Header("UI Elements")]
+    [SerializeField] private Image thumbnail;
+    [SerializeField] private Text machineNameText;
+    [SerializeField] private Transform modelContainer; // where model is instantiated (local)
+    [SerializeField] private GameObject expandedIndicator; // show when expanded
+
+    [Header("Animation")]
+    [SerializeField] private float expandedScale = 1.12f;
+    [SerializeField] private float animationDuration = 0.35f;
+
+    private MachineData data;
+    private GameObject modelInstance;
+    private Button button;
+    private Vector3 defaultScale;
+
+    public event Action<MachineCardController> OnCardSelected;
+
+    private void Awake()
+    {
+        button = GetComponent<Button>();
+        button.onClick.AddListener(HandleClick);
+        defaultScale = transform.localScale;
+        expandedIndicator?.SetActive(false);
+    }
+
+    public void Initialize(MachineData machineData, MachineFactory factory)
+    {
+        data = machineData;
+        machineNameText.text = data.machineName;
+        thumbnail.sprite = data.thumbnail;
+        // instantiate model (inactive initially to save performance)
+        if (modelInstance != null) Destroy(modelInstance);
+        if (data.modelPrefab != null && modelContainer != null)
+        {
+            modelInstance = factory.CreateModelInstance(data, modelContainer);
+            modelInstance.SetActive(false); // only active in expanded view
+        }
+    }
+
+    private void HandleClick()
+    {
+        OnCardSelected?.Invoke(this);
+    }
+
+    public void Expand()
+    {
+        transform.DOScale(expandedScale, animationDuration).SetEase(Ease.OutBack);
+        expandedIndicator?.SetActive(true);
+        if (modelInstance != null) modelInstance.SetActive(true);
+    }
+
+    public void Collapse()
+    {
+        transform.DOScale(defaultScale, animationDuration).SetEase(Ease.OutBack);
+        expandedIndicator?.SetActive(false);
+        if (modelInstance != null) modelInstance.SetActive(false);
+    }
+
+    public MachineData GetMachineData() => data;
+
+    private void OnDestroy()
+    {
+        button.onClick.RemoveListener(HandleClick);
+    }
+}
+
+
