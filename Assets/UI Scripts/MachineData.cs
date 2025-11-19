@@ -7,7 +7,6 @@ public class MachineData : ScriptableObject
     [TextArea] public string description;
     public MachineType machineType; // enum AC/DC (create below)
     public GameObject modelPrefab; // prefab of 3D model
-    public Sprite thumbnail; // optional UI image
     [Header("Technical Specs")]
     public float defaultVoltage;
     public float defaultCurrent;
