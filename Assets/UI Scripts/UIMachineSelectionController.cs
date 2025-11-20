@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,6 +12,9 @@ public class UIMachineSelectionController : MonoBehaviour
     [SerializeField] private Transform cardsParent;
     [SerializeField] private List<MachineData> machineDatas;
     [SerializeField] private MachineFactory factory;
+
+    [Header("Card Positions (Manual)")]
+    [SerializeField] private List<Vector2> cardPositions;
 
     private List<MachineCardController> cards = new List<MachineCardController>();
     private MachineCardController expandedCard;
@@ -43,10 +46,12 @@ public class UIMachineSelectionController : MonoBehaviour
         foreach (Transform t in cardsParent) Destroy(t.gameObject);
         cards.Clear();
 
-        foreach (var md in machineDatas)
+        for (int i = 0; i < machineDatas.Count; i++)
         {
             var card = Instantiate(cardPrefab, cardsParent);
-            card.Initialize(md, factory);
+            card.Initialize(machineDatas[i], factory);
+            RectTransform rect = card.GetComponent<RectTransform>();
+            rect.anchoredPosition = cardPositions[i];   // ← ← Posición manual
             card.OnCardSelected += HandleCardSelected;
             cards.Add(card);
         }
@@ -67,17 +72,24 @@ public class UIMachineSelectionController : MonoBehaviour
     #region Info Logic
     private void ShowInfo(MachineData data, MachineCardController card)
     {
+        cardsParent.gameObject.SetActive(false);   // ⬅⬅ Oculta el panel de AC/DC
+
         nameText.text = data.machineName;
         descriptionText.text = data.description;
         specsText.text = FormatSpecs(data);
+
         infoPanelGO.SetActive(true);
     }
+
 
     private void CloseInfo()
     {
         infoPanelGO.SetActive(false);
+        cardsParent.gameObject.SetActive(true);   // ⬅⬅ Muestra nuevamente AC/DC
+
         expandedCard?.Collapse();
     }
+
 
     private string FormatSpecs(MachineData d)
     {
@@ -89,7 +101,7 @@ public class UIMachineSelectionController : MonoBehaviour
     private void OnAccept()
     {
         MachineSelectionManager.Instance.SetMachine(expandedCard.GetMachineData());
-        FindObjectOfType<SceneLoader>()?.LoadScene("WeldingPracticeScene");
+        FindObjectOfType<SceneLoader>()?.LoadScene("MainVR");
     }
     #endregion
 

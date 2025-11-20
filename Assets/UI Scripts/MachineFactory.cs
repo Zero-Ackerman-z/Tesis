@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class MachineFactory : MonoBehaviour
 {
-    // Simple factory - instantiate model under a parent
     public GameObject CreateModelInstance(MachineData data, Transform parent)
     {
         if (data == null || data.modelPrefab == null) return null;

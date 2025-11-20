@@ -2,16 +2,23 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
     [Header("Fade")]
-    [SerializeField] private CanvasGroup fadeCanvasGroup;
+    [SerializeField] private Image fadeImage; 
     [SerializeField] private float fadeDuration = 0.6f;
 
     private void Reset()
     {
-        fadeCanvasGroup = GetComponentInChildren<CanvasGroup>();
+        fadeImage = GetComponentInChildren<Image>();
+        if (fadeImage != null)
+        {
+            var c = fadeImage.color;
+            c.a = 0f;
+            fadeImage.color = c;
+        }
     }
 
     public void LoadScene(string sceneName)
@@ -21,18 +28,18 @@ public class SceneLoader : MonoBehaviour
 
     private IEnumerator LoadSceneRoutine(string sceneName)
     {
-        if (fadeCanvasGroup != null)
+        if (fadeImage != null)
         {
-            yield return fadeCanvasGroup.DOFade(1f, fadeDuration).SetUpdate(true).WaitForCompletion();
+            yield return fadeImage.DOFade(1f, fadeDuration).SetUpdate(true).WaitForCompletion();
         }
 
         var async = SceneManager.LoadSceneAsync(sceneName);
-        while (!async.isDone) yield return null;
+        while (!async.isDone)
+            yield return null;
 
-        if (fadeCanvasGroup != null)
+        if (fadeImage != null)
         {
-            fadeCanvasGroup.alpha = 1f;
-            yield return fadeCanvasGroup.DOFade(0f, fadeDuration).SetUpdate(true).WaitForCompletion();
+            yield return fadeImage.DOFade(0f, fadeDuration).SetUpdate(true).WaitForCompletion();
         }
     }
 }

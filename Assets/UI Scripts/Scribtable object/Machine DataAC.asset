@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05629bb1875fe514199932384fc06d8b, type: 3}
   m_Name: Machine DataAC
   m_EditorClassIdentifier: 
-  machineName: 
-  description: zzzzzz
+  machineName: ac
+  description: "lkfwefkewo\xF1fk"
   machineType: 0
-  modelPrefab: {fileID: 0}
-  thumbnail: {fileID: 0}
-  defaultVoltage: 0
-  defaultCurrent: 0
-  components: []
+  modelPrefab: {fileID: 9058618928280474243, guid: 97f2c25f93da6804e90568040d66eb1f,
+    type: 3}
+  defaultVoltage: 40
+  defaultCurrent: 90
+  components:
+  - kijrjsf
+  - onjfloewfo

@@ -3,13 +3,14 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class MachineCardController : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI machineNameText;
     [SerializeField] private Transform modelContainer; // where model is instantiated (local)
-    [SerializeField] private GameObject expandedIndicator; // show when expanded
+
 
     [Header("Animation")]
     [SerializeField] private float expandedScale = 1.12f;
@@ -27,7 +28,6 @@ public class MachineCardController : MonoBehaviour
         button = GetComponent<Button>();
         button.onClick.AddListener(HandleClick);
         defaultScale = transform.localScale;
-        expandedIndicator?.SetActive(false);
     }
 
     public void Initialize(MachineData machineData, MachineFactory factory)
@@ -51,14 +51,12 @@ public class MachineCardController : MonoBehaviour
     public void Expand()
     {
         transform.DOScale(expandedScale, animationDuration).SetEase(Ease.OutBack);
-        expandedIndicator?.SetActive(true);
         if (modelInstance != null) modelInstance.SetActive(true);
     }
 
     public void Collapse()
     {
         transform.DOScale(defaultScale, animationDuration).SetEase(Ease.OutBack);
-        expandedIndicator?.SetActive(false);
         if (modelInstance != null) modelInstance.SetActive(false);
     }
 
